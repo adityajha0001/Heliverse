@@ -1,16 +1,26 @@
+import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Page from "./components/page";
+import store from "./store/store";
+import Team from "./components/team/team";
+import Nav from "./components/home/nav";
+import Data from "./components/home/data";
 
 function App() {
   return (
    <>
-      <BrowserRouter>
+     <Provider store={store}>
+     <BrowserRouter>
+     <Nav/>
         <Routes>
-          <Route path="/" element={<Page/>}/>
+          <Route path="/" element={<Data/>}/>
+          <Route path="/team" element={<Team/>}/>
         </Routes>
     </BrowserRouter>
    
    
+
+
+     </Provider>
    
    </>
   );

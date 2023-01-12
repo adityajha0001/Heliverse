@@ -1,19 +1,32 @@
 import INFOS from "../../data/heliverse_mock_data.json";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { add } from "../../store/cartSlice";
 
 
 
 export default function Data (){
+
+    const dispatch = useDispatch();
+
     const [searchTerm, setSearchTerm] =useState("");
+
+
+
+    const handleAdd =(INFO) =>{
+        dispatch(add(INFO));
+
+    }; 
+
     return(
         <>
         <div>
-            <div className="py-4 px-64">
-                <input className="w-full h-16" type="text" placeholder="  Search..." onChange={(event)=>{setSearchTerm(event.target.value)}}/>
+            <div className="pt-12 px-12">
+                <input className=" h-12 bg-gray-100  border-4  border-sky-500" type="text" placeholder="  Search..." onChange={(event)=>{setSearchTerm(event.target.value)}}/>
             </div>
 
         
-            <div className=" grid grid-cols-4 px-32 py-8 ">
+            <div className=" grid grid-cols-4 px-8 py-8 ">
                  {INFOS.filter((INFO)=>{
                     if(searchTerm==""){
                         return INFO
@@ -21,14 +34,14 @@ export default function Data (){
                         return INFO
                     }else if (INFO.domain.toLowerCase().includes(searchTerm.toLowerCase())){
                         return INFO
-                    }else if (INFO.gender.toLowerCase().includes(searchTerm.toLowerCase())){
+                    }else if (INFO.gender.toLocaleUpperCase().includes(searchTerm.toLocaleUpperCase())){
                         return INFO
                     }
                  }).map(INFO =>{
                     return(
                         <>
                         <div className="">
-                            <div className="flex gap-2">
+                            <div className="flex  bg-gray-100 mx-2 my-4 pb-4">
                                 <img  style ={{height: 200 }}src={INFO.avatar}/>
                                 <div className="pt-12 ">
                                     <h1 className="font-bold">{INFO.id}</h1>
@@ -37,7 +50,7 @@ export default function Data (){
                                     <h1 className="text-sm" >{INFO.email}</h1>
                                     <h1 className="text-sm" >{INFO.domain}</h1>
                                     <h1 className="text-sm">{INFO.available}</h1>
-                                    <h1 className="pt-2"><button className="font-bold text-sm bg-blue-400 rounded-lg px-4 py-2 text-white">Add</button></h1>
+                                    <button onClick={()=>handleAdd(INFO )} className="font-bold hover:bg-blue-400 text-sm bg-blue-600 rounded-lg px-4 py-2 text-white">Add to team</button>
                                 </div>
                            
                             </div>
