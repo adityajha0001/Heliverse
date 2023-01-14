@@ -25,6 +25,8 @@ export default function Team (){
                             <h1 className="text-sm">{INFO.gender}</h1>
                             <h1 className="text-sm" >{INFO.email}</h1>
                             <h1 className="text-sm" >{INFO.domain}</h1>
+                        
+
                             <button onClick={()=> handleRemove(INFO.id)} className="bg-red-500 hover:bg-red-300 px-4 py-2 rounded-lg text-sm">Remove player</button>
                         </div>
                     </div>

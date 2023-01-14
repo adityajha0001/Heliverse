@@ -33,12 +33,15 @@ export default function Data (){
     const displayUsers = INFOS.filter((INFO)=>{
         if(searchTerm==""){
             return INFO
-        }else if (INFO.first_name.toLowerCase().includes(searchTerm.toLowerCase())){
-            return INFO
         }else if (INFO.domain.toLowerCase().includes(searchTerm.toLowerCase())){
             return INFO
-        }else if (INFO.gender.toLocaleUpperCase().includes(searchTerm.toLocaleUpperCase())){
+        }else if (INFO.gender.toLowerCase().startsWith(searchTerm.toLowerCase())){
             return INFO
+        }else if (INFO.first_name.toLowerCase().startsWith(searchTerm.toLowerCase())){
+            return INFO
+        }else if(INFO.available.toString().includes(searchTerm.toLowerCase())){
+            return INFO
+
         }
         }).slice(pageVisited,pageVisited + usersPerPage).map((INFO)=>{
         return(
@@ -52,7 +55,13 @@ export default function Data (){
                         <h1 className="text-sm">{INFO.gender}</h1>
                         <h1 className="text-sm" >{INFO.email}</h1>
                         <h1 className="text-sm" >{INFO.domain}</h1>
-                        <h1 className="text-sm">{INFO.available}</h1>
+                        <h1 className="text-sm">{INFO.available} </h1>
+
+
+
+
+
+
                         <button onClick={()=>handleAdd(INFO )} className="font-bold hover:bg-blue-400 text-sm bg-blue-600 rounded-lg px-4 py-2 text-white">Add to team</button>
                     </div>
                 </div>
