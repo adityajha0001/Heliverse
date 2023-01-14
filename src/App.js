@@ -4,6 +4,7 @@ import store from "./store/store";
 import Team from "./components/team/team";
 import Nav from "./components/home/nav";
 import Data from "./components/home/data";
+import TeamInfo from "./components/team/teamInfo";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Data/>}/>
           <Route path="/team" element={<Team/>}/>
+          <Route path="/teaminfo" element={<TeamInfo/>}/>
         </Routes>
     </BrowserRouter>
    
