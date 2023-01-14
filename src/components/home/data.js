@@ -2,11 +2,11 @@ import INFOS from "../../data/heliverse_mock_data.json";
 import { useDispatch } from "react-redux";
 import { add } from "../../store/cartSlice";
 import React, { useState, useEffect } from 'react';  
-import { ReactPaginate } from 'react'
+import ReactPaginate from "react-paginate";
 
 
 export default function Data (){
-    const [users, setUsers] = useState(INFOS.slice(0,20));
+    const [users, setUsers] = useState(INFOS.slice(0,1000));
     const [pageNumber, setpageNumber ]= useState(0)
 
     const usersPerPage =20
@@ -29,10 +29,6 @@ export default function Data (){
     }; 
 
   
-    const changePage = ({selected}) =>{
-        setpageNumber(selected);
-
-    }; 
 
     const displayUsers = INFOS.filter((INFO)=>{
         if(searchTerm==""){
@@ -64,7 +60,12 @@ export default function Data (){
             </>
         )});
 
-        const pageCount = Math.ceil(users.length/ usersPerPage);
+        const pageCount = Math.ceil(users.length / usersPerPage);
+
+        const changePage = ({selected}) =>{
+            setpageNumber(selected);
+    
+        }; 
 
        return(
         <>
@@ -76,20 +77,18 @@ export default function Data (){
 
         <div className="grid grid-cols-4 px-8 py-8 "> 
             {displayUsers}
+            <ReactPaginate className="flex mx-96 px-44 gap-8"
+               previousLabel={"Previous"}
+               nextLabel={"Next"}
+               pageCount={pageCount}
+               onPageChange={changePage}
+               containerClassName={"paginationBttns"}
+               previousLinkClassName={"previousBttn"}
+               nextLinkClassName={"nextBttn"}
+               disabledClassName={"paginationDisabled"}
+               activeClassName={"paginationActive"}
+            />
             </div>
-            <ReactPaginate>
-            previousLabel ={"Previous"}
-            nextLabel ={"Next"}
-            pageCount={"pageCount"}
-            onPageChange ={"changePage"}
-            containerClassName ={"paginationBttns"}
-            previousLinkClassName ={"previousBttn"}
-            nextLinkClassName ={"nextBttn"}
-            disabledClassName ={"paginationDisabled"}
-            activeClassName ={"paginationActive"}
-            
-            
-            </ReactPaginate>
            
             
             
